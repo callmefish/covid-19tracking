@@ -20,6 +20,7 @@ import StateChart from "./stateChart";
 
 
 function Chart(props){
+    // Minimal Bundle for echarts
     echarts.use([TitleComponent, TooltipComponent, GridComponent, DataZoomComponent, LineChart, CanvasRenderer, LegendComponent]);
     
     return (

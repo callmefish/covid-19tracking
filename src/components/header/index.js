@@ -25,11 +25,13 @@ function Header(props){
         }
     ]);
     useEffect(()=>{
+        // first mount, get data and update time and card
         dispatch(getUSCurrent()).then(res=>{
             setUpdateTime(res.updateTime);
             setCardData(res.cardData);
         });
     }, []);
+    // add active when click
     function itemActive(Index){
         let cards = secondHeader.current.querySelectorAll(".card");
         cards.forEach(item => {

@@ -17,7 +17,9 @@ import getStatesCurrent from "../../store/action/getStatesCurrent";
 
 function Map(props) {
   let {dispatch, setOneState, mapType} = props;
+  // Minimal Bundle for echarts
   echarts.use([TitleComponent,ToolboxComponent,TooltipComponent,VisualMapComponent,GeoComponent,MapChart,CanvasRenderer,]);
+  // initial value use the map of population estimates
   let [mapData, setMapData] = useState([
     {name: 'Alabama', value: 4822023},
     {name: 'Alaska', value: 731449},
@@ -72,6 +74,7 @@ function Map(props) {
     {name: 'Wyoming', value: 576412},
     {name: 'Puerto Rico', value: 3667084}
   ]);
+  // uesRef hold a mutable value in its .current property.
   var myChart = useRef(null);
   var visualMap = {
       left: "right",
@@ -83,6 +86,7 @@ function Map(props) {
       text: ["High", "Low"], // Text, default is numeric text
       calculable: true,
   };
+  // option for echarts
   var option = {
     title: {
       text: 'USA ' + `${mapType?mapType:"Population Estimates (2012)"}`,
@@ -144,7 +148,11 @@ function Map(props) {
   };
   var chart;
   function showMap() {
-    chart = echarts.init(myChart.current);
+    // if has an instance, don't initialize again
+    chart = echarts.getInstanceByDom(myChart.current);
+    if(!chart){
+      chart = echarts.init(myChart.current);
+    }
     echarts.registerMap("USA", usaMap, {
       // change some place of state on the map
       Alaska: {
@@ -163,10 +171,13 @@ function Map(props) {
         width: 2,
       },
     });
+    // Configuration item, data, universal interface, all parameters and data can all be modified through setOption. 
+    // ECharts will merge new parameters and data, and then refresh chart.
     chart.setOption(option);
   }
 
   useEffect(() => {
+    // first mount, get data
     dispatch(getStatesCurrent()).then((res) => {
       let ans = [];
       for (let i = 0; i < res.length; i++) {
@@ -182,11 +193,14 @@ function Map(props) {
           });
         }
       }
+      // update to mapData
       setMapData(ans);
+      // show the map
       showMap();
     });
   }, []);
 
+  // change the min value and max value of map
   function changeMinMax(minValue, maxValue, itemValue){
     if(maxValue < itemValue){
       maxValue = itemValue; 
@@ -196,6 +210,7 @@ function Map(props) {
     }
     return [minValue, maxValue];
   }
+  // change value of mapData, and the min and max value of visualMap
   function changeValue(){
     let minV = 38000000;
     let maxV = 0;
@@ -203,22 +218,26 @@ function Map(props) {
       mapData.map(item=>{
         item.value=item.positive;
         [minV, maxV] = changeMinMax(minV, maxV, item.value);
+        return item;
       });
     }else if(mapType==="HOSPITALIZED"){
       mapData.map(item=>{
         item.value=item.hospitalized;
         [minV, maxV] = changeMinMax(minV, maxV, item.value);
+        return item;
       });
     }else if(mapType==="TOTAL DEATHS"){
       mapData.map(item=>{
         item.value=item.death;
         [minV, maxV] = changeMinMax(minV, maxV, item.value);
+        return item;
       });
     }
     visualMap.min = minV;
     visualMap.max = maxV;
   }
   useEffect(()=>{
+    // depends on mapType to change the map
     if (mapType!==""){
       changeValue();
     }

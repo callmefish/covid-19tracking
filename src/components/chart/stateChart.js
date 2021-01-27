@@ -5,6 +5,7 @@ import usStatesReverse from "./usStatesReverse.json";
 
 function StateChart(props){
     let {dispatch, oneState, echarts, className} = props;
+    // Initialize the data
     const [historyDate, setHistoryDate] = useState([]);
     const [positive, setPositive] = useState([]);
     const [positiveIncrease, setPositiveIncrease] = useState([]);
@@ -82,30 +83,57 @@ function StateChart(props){
         ]
     };
     var myChart;
+    // configuration item of loading animation, which is related to loading type.
+    var defaultLoading = {
+        text: 'Click state in the map',
+        color: '#3799f5',
+        textColor: '#3799f5',
+        maskColor: 'rgba(255, 255, 255, 0.8)',
+        zlevel: 0,
+      
+        // Font size. Available since `v4.8.0`.
+        fontSize: 30,
+        // Show an animated "spinner" or not. Available since `v4.8.0`.
+        showSpinner: true,
+        // Radius of the "spinner". Available since `v4.8.0`.
+        spinnerRadius: 10,
+        // Line width of the "spinner". Available since `v4.8.0`.
+        lineWidth: 5,
+        // Font thick weight. Available since `v5.0.1`.
+        fontWeight: 'bold',
+        // Font style. Available since `v5.0.1`.
+        fontStyle: 'normal',
+        // Font family. Available since `v5.0.1`.
+        fontFamily: 'sans-serif'
+    };
     function showChart(option){
-        myChart = echarts.init(lineChart.current);
-        myChart.showLoading();
+        // avoid init again
+        myChart = echarts.getInstanceByDom(lineChart.current);
+        if(!myChart){
+            myChart = echarts.init(lineChart.current);
+        }
+        myChart.showLoading('default', defaultLoading);
         if (!loading){
             myChart.hideLoading();
             myChart.setOption(option);
         }
     }
-    function changeOption(option, date, pos, posI, hos, hosI, dea, deaI){
-        option.xAxis.data = date;
-        option.series[0].data = pos;
-        option.series[1].data = posI;
-        option.series[2].data = hos;
-        option.series[3].data = hosI;
-        option.series[4].data = dea;
-        option.series[5].data = deaI;
-        return option;
-    }
     useEffect(()=>{
         showChart(option);
     }, []);
+    // depends on oneState
     useEffect(()=>{
+        function changeOption(option, date, pos, posI, hos, hosI, dea, deaI){
+            option.xAxis.data = date;
+            option.series[0].data = pos;
+            option.series[1].data = posI;
+            option.series[2].data = hos;
+            option.series[3].data = hosI;
+            option.series[4].data = dea;
+            option.series[5].data = deaI;
+            return option;
+        }
         setLoading(false);
-        console.log(oneState);
         if(oneState!==""){
             dispatch(getStateHistory(usStatesReverse[oneState])).then(res=>{
                 let [date, pos, posI, hos, hosI, dea, deaI] = [
@@ -124,6 +152,7 @@ function StateChart(props){
                 setHospitalizedIncrease(hosI);
                 setDeath(dea);
                 setDeathIncrease(deaI);
+                // because need deep update and useState is async update, use the new data by a function
                 option = changeOption(option, date, pos, posI, hos, hosI, dea, deaI);
                 showChart(option);
             });

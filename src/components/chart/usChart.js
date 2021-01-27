@@ -4,6 +4,7 @@ import getUSHistory from "../../store/action/getUSHistory";
 
 function USChart(props){
     let {dispatch, mapType, echarts, className} = props;
+    // initialize data
     const [historyDate, setHistoryDate] = useState([]);
     const [positive, setPositive] = useState([]);
     const [positiveIncrease, setPositiveIncrease] = useState([]);
@@ -11,6 +12,7 @@ function USChart(props){
     const [hospitalizedIncrease, setHospitalizedIncrease] = useState([]);
     const [death, setDeath] = useState([]);
     const [deathIncrease, setDeathIncrease] = useState([]);
+    // loading of map
     const [loading, setLoading] = useState(true);
     var lineChart = useRef(null);
     var option = {
@@ -81,9 +83,36 @@ function USChart(props){
         ]
     };
     var myChart;
+    // configuration item of loading animation, which is related to loading type.
+    var defaultLoading = {
+        text: 'Double Click',
+        color: '#c23531',
+        textColor: '#c23531',
+        maskColor: 'rgba(255, 255, 255, 0.8)',
+        zlevel: 0,
+      
+        // Font size. Available since `v4.8.0`.
+        fontSize: 30,
+        // Show an animated "spinner" or not. Available since `v4.8.0`.
+        showSpinner: true,
+        // Radius of the "spinner". Available since `v4.8.0`.
+        spinnerRadius: 10,
+        // Line width of the "spinner". Available since `v4.8.0`.
+        lineWidth: 5,
+        // Font thick weight. Available since `v5.0.1`.
+        fontWeight: 'bold',
+        // Font style. Available since `v5.0.1`.
+        fontStyle: 'normal',
+        // Font family. Available since `v5.0.1`.
+        fontFamily: 'sans-serif'
+    };
     function showChart(){
-        myChart = echarts.init(lineChart.current);
-        myChart.showLoading();
+        // avoid init again
+        myChart = echarts.getInstanceByDom(lineChart.current);
+        if(!myChart){
+            myChart = echarts.init(lineChart.current);
+        }
+        myChart.showLoading('default', defaultLoading);
         if (!loading){
             myChart.hideLoading();
             myChart.setOption(option);
@@ -91,6 +120,7 @@ function USChart(props){
     }
     useEffect(()=>{
         dispatch(getUSHistory()).then(res=>{
+            // update the data
             setHistoryDate(res.map(item=>item.date));
             setPositive(res.map(item=>item.positive));
             setPositiveIncrease(res.map(item=>item.positiveIncrease));
@@ -102,6 +132,7 @@ function USChart(props){
         });
     }, []);
     useEffect(()=>{
+        // if change the mapType, show the map
         setLoading(false);
         showChart();
     }, [mapType!==""]);
@@ -110,6 +141,7 @@ function USChart(props){
             className={className}
             ref={lineChart}
             onDoubleClick={()=>{
+                // Double click to show the map
                 setLoading(false);
                 showChart();
             }}
