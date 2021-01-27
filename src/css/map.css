@@ -1,0 +1,20 @@
+body {
+	background-color: #fff;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px; 
+    color: #000;
+}
+
+.map {
+    margin: 5%;
+}
+
+.mapChart {
+    height: 500px;
+    width: 90%;
+    position: absolute;
+}
+
+.map hr{
+    margin-top: 550px;
+}

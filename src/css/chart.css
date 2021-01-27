@@ -1,0 +1,27 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+}
+
+.charts {
+    margin: 5%;
+    padding-bottom: 100px;
+}
+
+.usChart {
+    height: 500px;
+    width: 48%;
+    position: absolute;
+}
+
+.stateChart {
+    height: 500px;
+    width: 48%;
+    right:0;
+    position: absolute;
+}
+.charts hr{
+    margin-top: 550px;
+}

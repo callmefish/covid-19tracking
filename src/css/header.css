@@ -1,0 +1,93 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+}
+
+.header {
+    margin: 5%;
+    padding: 0;
+}
+
+.firstHeader h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+}
+
+.firstHeader p {
+    color: rgb(73, 69, 69);
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.firstHeader i {
+    float: right;
+    color: rgb(76, 169, 23);
+}
+
+.header hr {
+    border-top: 1px solid rgba(0,0,0,.1);
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.secondHeader {
+    padding-top: 1.2rem;
+    text-align: center;
+    width: 96%;
+    padding-left: 2%;
+}
+
+.card {
+    display: inline-block;
+    width: 28%;
+    padding-bottom: 0.5rem;
+    margin-left: 2%;
+    margin-right: 2%;
+    box-shadow: 5px 5px 30px rgba(217, 217, 217, 0.4);
+    border-radius: 10px;
+    transition: all .3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 5px 5px 30px rgba(130, 187, 209, 0.8);
+    border-radius: 35px;
+    transform: scale(1.1);
+}
+
+.card h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    line-height: 47px;
+    font-weight: normal;
+}
+
+.card-number {
+    font-size: 48px;
+    height: 48px;
+    line-height: 48px;
+    color: #007c91;
+}
+
+.card-recent {
+    font-size: 18px;
+    padding-top: 10px;
+    color: #666666;
+}
+
+.card.active {
+    box-shadow: 5px 5px 30px rgba(130, 187, 209, 0.8);
+    background-color: rgba(130, 187, 209, 0.8);
+    border-radius: 35px;
+    transform: scale(1.1);
+}
+
+.card.active h3, .card.active .card-number, .card.active .card-recent{
+    color: aliceblue;
+}
