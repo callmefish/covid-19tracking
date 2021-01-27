@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/COVID-19Tracking/static/css/main.ed418621.chunk.css",
-    "main.js": "/COVID-19Tracking/static/js/main.12718ed1.chunk.js",
-    "main.js.map": "/COVID-19Tracking/static/js/main.12718ed1.chunk.js.map",
-    "runtime-main.js": "/COVID-19Tracking/static/js/runtime-main.e4009350.js",
-    "runtime-main.js.map": "/COVID-19Tracking/static/js/runtime-main.e4009350.js.map",
-    "static/js/2.0e4aaf40.chunk.js": "/COVID-19Tracking/static/js/2.0e4aaf40.chunk.js",
-    "static/js/2.0e4aaf40.chunk.js.map": "/COVID-19Tracking/static/js/2.0e4aaf40.chunk.js.map",
-    "static/js/3.a1730ece.chunk.js": "/COVID-19Tracking/static/js/3.a1730ece.chunk.js",
-    "static/js/3.a1730ece.chunk.js.map": "/COVID-19Tracking/static/js/3.a1730ece.chunk.js.map",
-    "index.html": "/COVID-19Tracking/index.html",
-    "static/css/main.ed418621.chunk.css.map": "/COVID-19Tracking/static/css/main.ed418621.chunk.css.map",
-    "static/js/2.0e4aaf40.chunk.js.LICENSE.txt": "/COVID-19Tracking/static/js/2.0e4aaf40.chunk.js.LICENSE.txt"
+    "main.css": "./static/css/main.ed418621.chunk.css",
+    "main.js": "./static/js/main.12718ed1.chunk.js",
+    "main.js.map": "./static/js/main.12718ed1.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.9fa87ecc.js",
+    "runtime-main.js.map": "./static/js/runtime-main.9fa87ecc.js.map",
+    "static/js/2.0e4aaf40.chunk.js": "./static/js/2.0e4aaf40.chunk.js",
+    "static/js/2.0e4aaf40.chunk.js.map": "./static/js/2.0e4aaf40.chunk.js.map",
+    "static/js/3.a1730ece.chunk.js": "./static/js/3.a1730ece.chunk.js",
+    "static/js/3.a1730ece.chunk.js.map": "./static/js/3.a1730ece.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.ed418621.chunk.css.map": "./static/css/main.ed418621.chunk.css.map",
+    "static/js/2.0e4aaf40.chunk.js.LICENSE.txt": "./static/js/2.0e4aaf40.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.e4009350.js",
+    "static/js/runtime-main.9fa87ecc.js",
     "static/js/2.0e4aaf40.chunk.js",
     "static/css/main.ed418621.chunk.css",
     "static/js/main.12718ed1.chunk.js"
