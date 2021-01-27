@@ -100,15 +100,24 @@ function Map(props) {
       formatter: function (params) {
         var paramsData = params.data;
         setOneState(paramsData.name);
-        return (`<div>
-          <b>${paramsData.name}</b><br />
-          <b>Positive</b> : ${paramsData.positive}<br />
-          <b>Positive Increase</b> : ${paramsData.positiveIncrease}<br />
-          <b>Hospitalized</b> : ${paramsData.hospitalized}<br />
-          <b>Hospitalized Increase</b> : ${paramsData.hospitalizedIncrease}<br />
-          <b>Death</b> : ${paramsData.death}<br />
-          <b>Death Increase</b> : ${paramsData.deathIncrease}
-        <div>`);
+        if(paramsData.hasOwnProperty("positive")){
+          return (`<div>
+              <b>${paramsData.name}</b><br />
+              <b>Positive</b> : ${paramsData.positive}<br />
+              <b>Positive Increase</b> : ${paramsData.positiveIncrease}<br />
+              <b>Hospitalized</b> : ${paramsData.hospitalized}<br />
+              <b>Hospitalized Increase</b> : ${paramsData.hospitalizedIncrease}<br />
+              <b>Death</b> : ${paramsData.death}<br />
+              <b>Death Increase</b> : ${paramsData.deathIncrease}
+            <div>`);
+        }else{
+          return (
+            `<div>
+              <b>${paramsData.name}</b><br />
+              <b>Population</b> : ${paramsData.value}<br />
+            </div>`
+          );
+        }
       },
     },
     visualMap: visualMap,
